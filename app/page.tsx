@@ -22,15 +22,11 @@ import {
 import { Input } from "@/components/ui/input"
 
 const formSchema = z.object({
-  firstName: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  lastName: z.string(),
-  phoneNumber: z.string(),
-  corporationNumber: z.string()
+  firstName: z.string().max(50),
+  lastName: z.string().max(50),
+  phoneNumber: z.e164().length(12),
+  corporationNumber: z.string().max(9)
 })
-// TODO: max field input length 50
-// TODO: phone number verification using hook
 
 export default function Home() {
     // 1. Define your form.

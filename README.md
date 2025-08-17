@@ -30,5 +30,6 @@ Built with:
 - accessibility, semantic elements
 - mobile breakpoints
 - more standardized tailwind classes (less `gap-[32px]`)
-- Move ShadCN Components into individual files
 - icon pack for arrows instead of unicode
+- storybook e2e
+- use libphonenumber-js and customize phone input to country in separate custom hook
