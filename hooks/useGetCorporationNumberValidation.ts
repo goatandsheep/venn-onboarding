@@ -1,0 +1,17 @@
+
+type corporationNumberResponseBad = {
+    message: string,
+    valid: boolean
+}
+type corporationNumberResponseGood = {
+    corporationNumber: string,
+    valid: boolean
+}
+export type corporationNumberResponse = corporationNumberResponseGood | corporationNumberResponseBad
+
+export const useGetCorporationNumberValidation = async (corporationNumber: string): Promise<corporationNumberResponse> => {
+    const response = await fetch(
+    `https://fehometask-api.qa.vault.tryvault.com/corporation-number/${corporationNumber}`,
+    )
+    return await response.json() as Promise<corporationNumberResponse>
+}

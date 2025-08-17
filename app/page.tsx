@@ -30,13 +30,8 @@ const formSchema = z.object({
 
 export default function Home() {
   const form = useForm<z.infer<typeof formSchema>>({
+    mode: "onBlur",
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      phoneNumber: "",
-      corporationNumber: "",
-    },
   })
   // TODO: check values onBlur
   // TODO: check the phone number value
@@ -67,7 +62,7 @@ export default function Home() {
                           <FormItem>
                             <FormLabel>First Name</FormLabel>
                             <FormControl>
-                              <Input {...field} />
+                              <Input {...field} autoComplete="given-name" />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -80,7 +75,7 @@ export default function Home() {
                           <FormItem>
                             <FormLabel>Last Name</FormLabel>
                             <FormControl>
-                              <Input {...field} />
+                              <Input {...field} autoComplete="family-name" />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -94,7 +89,7 @@ export default function Home() {
                         <FormItem>
                           <FormLabel>Phone Number</FormLabel>
                           <FormControl>
-                            <Input {...field} />
+                            <Input {...field} autoComplete="tel" type="tel"/>
                           </FormControl>
                           <FormMessage />
                         </FormItem>
