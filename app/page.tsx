@@ -30,7 +30,7 @@ const formSchema = z.object({
   corporationNumber: z.string()
 })
 // TODO: max field input length 50
-// TODO: phone number verification?
+// TODO: phone number verification using hook
 
 export default function Home() {
     // 1. Define your form.
@@ -57,7 +57,7 @@ export default function Home() {
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <Card>
           <CardHeader>
-            <CardTitle>Onboarding Form</CardTitle>
+            <CardTitle >Onboarding Form</CardTitle>
           </CardHeader>
           <CardContent>
             <Form {...form}>
@@ -116,7 +116,7 @@ export default function Home() {
                         </FormItem>
                       )}
                     />
-                    <Button type="submit">Submit</Button>
+                    <Button className="w-full" type="submit">Submit 🡢</Button>
                   </form>
                 </Form>
           </CardContent>

@@ -27,7 +27,8 @@ Built with:
 - branching strategy
 - prettier / stricter eslint
 - split page.tsx into smaller components for each step
-- accessibility
+- accessibility, semantic elements
 - mobile breakpoints
 - more standardized tailwind classes (less `gap-[32px]`)
 - Move ShadCN Components into individual files
+- icon pack for arrows instead of unicode
