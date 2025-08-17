@@ -29,3 +29,5 @@ Built with:
 - split page.tsx into smaller components for each step
 - accessibility
 - mobile breakpoints
+- more standardized tailwind classes (less `gap-[32px]`)
+- Move ShadCN Components into individual files
