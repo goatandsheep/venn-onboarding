@@ -29,7 +29,6 @@ const formSchema = z.object({
 })
 
 export default function Home() {
-    // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -39,6 +38,8 @@ export default function Home() {
       corporationNumber: "",
     },
   })
+  // TODO: check values onBlur
+  // TODO: check the phone number value
 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -47,7 +48,7 @@ export default function Home() {
     console.log(values)
   }
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
+    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 bg-gray-100">
       <div>Step 1 of 5</div>
       {/* TODO: validate corp field with GET */}
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
