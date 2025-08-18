@@ -1,15 +1,16 @@
 import z from "zod"
 
 export const submitBusinessFormSchema = z.object({
-  firstName: z.string().max(50),
-  lastName: z.string().max(50),
-  phoneNumber: z.e164().length(12),
+  firstName: z.string().min(1).max(50),
+  lastName: z.string().min(1).max(50),
+  phone: z.e164().length(12),
   corporationNumber: z.string().max(9)
 })
+// TODO: corporationNumber: z.string().regex(/^\d%/)
 
 export type submitBusinessFormSchemaType = z.infer<typeof submitBusinessFormSchema>;
 
-export const useSubmitBusinessForm = async (formValues: submitBusinessFormSchemaType) => {
+export const submitBusinessForm = async (formValues: submitBusinessFormSchemaType) => {
     const response = await fetch(
     "https://fe-hometask-api.qa.vault.tryvault.com/profile-details",
     {

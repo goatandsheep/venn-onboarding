@@ -1,5 +1,5 @@
 import { describe, expect, test } from '@jest/globals';
-import { useGetCorporationNumberValidation, corporationNumberResponse } from './useGetCorporationNumberValidation';
+import { getCorporationNumberValidation, corporationNumberResponse } from './getCorporationNumberValidation';
 
 const InvalidCorporationNumberError = "Invalid corporation number";
 
@@ -22,7 +22,7 @@ const testNumbers: [string, corporationNumberResponse][] = [
 
 describe('add utility', () => {
   test.each(testNumbers)('checks corporation number %i to get %s', async (a, b) => {
-    const result = await useGetCorporationNumberValidation(a)
+    const result = await getCorporationNumberValidation(a)
     expect(result).toBe(b);
   });
 });

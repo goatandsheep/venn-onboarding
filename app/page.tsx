@@ -2,7 +2,6 @@
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { z } from "zod"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -21,21 +20,28 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 
-import {submitBusinessFormSchema, useGetCorporationNumberValidation} from '@/hooks';
+import { getCorporationNumberValidation, submitBusinessForm, submitBusinessFormSchema, submitBusinessFormSchemaType } from '@/lib'
 
 export default function Home() {
-  const form = useForm<z.infer<typeof submitBusinessFormSchema>>({
+  const form = useForm<submitBusinessFormSchemaType>({
     mode: "onBlur",
     resolver: zodResolver(submitBusinessFormSchema),
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+      phone: '',
+      corporationNumber: '',
+    }
   })
   // TODO: check values onBlur
   // TODO: check the phone number value
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof submitBusinessFormSchema>) {
+  function onSubmit(values: submitBusinessFormSchemaType) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values)
+    submitBusinessForm(values)
   }
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 bg-gray-100">
@@ -48,64 +54,71 @@ export default function Home() {
           </CardHeader>
           <CardContent>
             <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                    <div className="flex flex-row gap-[20px]">
-                      <FormField
-                        control={form.control}
-                        name="firstName"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>First Name</FormLabel>
-                            <FormControl>
-                              <Input {...field} autoComplete="given-name" />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="lastName"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Last Name</FormLabel>
-                            <FormControl>
-                              <Input {...field} autoComplete="family-name" />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                    <FormField
-                      control={form.control}
-                      name="phoneNumber"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Phone Number</FormLabel>
-                          <FormControl>
-                            <Input {...field} autoComplete="tel" type="tel"/>
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="corporationNumber"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Corporation Number</FormLabel>
-                          <FormControl>
-                            <Input {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <Button className="w-full" type="submit">Submit 🡢</Button>
-                  </form>
-                </Form>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                <div className="flex flex-row gap-[20px]">
+                  <FormField
+                    control={form.control}
+                    name="firstName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>First Name</FormLabel>
+                        <FormControl>
+                          <Input {...field} autoComplete="given-name" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="lastName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Last Name</FormLabel>
+                        <FormControl>
+                          <Input {...field} autoComplete="family-name" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <FormField
+                  control={form.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Phone Number</FormLabel>
+                      <FormControl>
+                        <Input {...field} autoComplete="tel" type="tel"/>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="corporationNumber"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Corporation Number</FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                  rules={{
+                    validate: async (value) => {
+                      console.log('test', value)
+                      const isCorpInputValid = await getCorporationNumberValidation(value)
+                      return isCorpInputValid.valid;
+                    }
+                  }}
+                />
+                <Button className="w-full" type="submit">Submit 🡢</Button>
+              </form>
+            </Form>
           </CardContent>
         </Card>
       </main>

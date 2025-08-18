@@ -9,7 +9,8 @@ type corporationNumberResponseGood = {
 }
 export type corporationNumberResponse = corporationNumberResponseGood | corporationNumberResponseBad
 
-export const useGetCorporationNumberValidation = async (corporationNumber: string): Promise<corporationNumberResponse> => {
+export const getCorporationNumberValidation = async (corporationNumber: string): Promise<corporationNumberResponse> => {
+    console.log('corporation string', corporationNumber);
     const response = await fetch(
     `https://fe-hometask-api.qa.vault.tryvault.com/corporation-number/${corporationNumber}`,
     )

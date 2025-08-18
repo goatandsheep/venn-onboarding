@@ -33,3 +33,10 @@ Built with:
 - icon pack for arrows instead of unicode
 - storybook e2e
 - use libphonenumber-js and customize phone input to country in separate custom hook
+- finish TanStack setup and use it for API
+- make get utils hooks
+- try / catch, error handling
+
+## Questions
+
+What is the result of a failed 400 status code?
