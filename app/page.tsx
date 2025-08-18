@@ -21,23 +21,18 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 
-const formSchema = z.object({
-  firstName: z.string().max(50),
-  lastName: z.string().max(50),
-  phoneNumber: z.e164().length(12),
-  corporationNumber: z.string().max(9)
-})
+import {submitBusinessFormSchema, useGetCorporationNumberValidation} from '@/hooks';
 
 export default function Home() {
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<z.infer<typeof submitBusinessFormSchema>>({
     mode: "onBlur",
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(submitBusinessFormSchema),
   })
   // TODO: check values onBlur
   // TODO: check the phone number value
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: z.infer<typeof submitBusinessFormSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values)

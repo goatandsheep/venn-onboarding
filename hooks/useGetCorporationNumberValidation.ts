@@ -11,7 +11,7 @@ export type corporationNumberResponse = corporationNumberResponseGood | corporat
 
 export const useGetCorporationNumberValidation = async (corporationNumber: string): Promise<corporationNumberResponse> => {
     const response = await fetch(
-    `https://fehometask-api.qa.vault.tryvault.com/corporation-number/${corporationNumber}`,
+    `https://fe-hometask-api.qa.vault.tryvault.com/corporation-number/${corporationNumber}`,
     )
     return await response.json() as Promise<corporationNumberResponse>
 }
